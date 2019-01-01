@@ -169,7 +169,6 @@ module FanControl(
            
          // calculate smoothed temp to use
          uf_use_temp = transition(uf_last_temp, uf_real_temp, uf_smooth_divisor);
-         //uf_use_temp = uf_real_temp;
       
     end;
     
@@ -192,7 +191,7 @@ module FanControl(
         case (state)
             FAN_OFF :
                 begin
-                    if(forced_PWM_in != 0)
+                    if(forced_PWM_in[12] != 0)
                         nxtState = FAN_FORCED;
                     else if(uf_use_temp >= uf_high_temp)
                         nxtState = FAN_ON;
@@ -202,7 +201,7 @@ module FanControl(
                 
             FAN_PROCESS :
                 begin
-                    if(forced_PWM_in != 0)
+                    if(forced_PWM_in[12] != 0)
                         nxtState = FAN_FORCED;
                     else if(uf_use_temp >= uf_high_temp)
                         nxtState = FAN_ON;
@@ -212,7 +211,7 @@ module FanControl(
                 
             FAN_ON :
                 begin
-                    if(forced_PWM_in != 0)
+                    if(forced_PWM_in[12] != 0)
                         nxtState = FAN_FORCED;
                     else if(uf_use_temp < uf_high_temp)
                     begin
@@ -225,7 +224,7 @@ module FanControl(
                 
              FAN_FORCED:
                 begin
-                    if(forced_PWM_in == 0)
+                    if(forced_PWM_in[12] == 0)
                         nxtState = FAN_PROCESS;
                 end
         endcase            
