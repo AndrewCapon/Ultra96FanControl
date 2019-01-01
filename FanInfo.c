@@ -109,6 +109,7 @@ int main()
     volatile unsigned *pDbg8Reg 		= pPWMReg+14;
     volatile unsigned *pDbg9Reg 		= pPWMReg+15;
 
+    char *states[] = {"FAN_OFF", "FAN_PROCESS", "FAN_ON", "FAN_FORCED"};
     clear();
     while(1)
     {
@@ -150,12 +151,9 @@ int main()
 
 		float 		fMaxPWM		= toFloat(*pDbg9Reg);
 
-		printf("Dbg0 (state)     = %d                   \n", uState);
-		printf("Dbg1 (PWM)       = %x                   \n", uPWM);
+		printf("Dbg0 (state)     = %s                   \n", states[uState]);
 		printf("Dbg1 (PWM)       = %f                   \n", fPWM);
-		printf("Dbg2 (usePWM)    = %x                   \n", uUsePWM);
 		printf("Dbg2 (usePWM)    = %f                   \n", fUsePWM);
-		printf("Dbg3 (lastPWM)   = %x                   \n", uLastPWM);
 		printf("Dbg3 (lastPWM)   = %f                   \n\n", fLastPWM);
 
 		printf("Dbg4 (Real Temp) = %f                   \n", fRealTemp);
