@@ -77,7 +77,7 @@ module FanControl(
         reg `UFixed fDiff;
         reg `UFixed fDiffSmoothed;
         begin
-            if((fRatio == 0) || (fRatio==1))
+            if((fRatio == 0) || (fRatio==1) || (fLast == fNew))
                 transition = fNew;
             else
                 if(fLast > fNew)
